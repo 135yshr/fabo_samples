@@ -11,7 +11,6 @@ import (
 func main() {
 	firmataAdaptor := firmata.NewAdaptor("/dev/tty.usbmodem1411")
 	led := gpio.NewLedDriver(firmataAdaptor, "13")
-	button := gpio.NewButtonDriver(firmataAdaptor, "12")
 
 	work := func() {
 		gobot.Every(1*time.Second, func() {
@@ -21,7 +20,7 @@ func main() {
 
 	robot := gobot.NewRobot("bot",
 		[]gobot.Connection{firmataAdaptor},
-		[]gobot.Device{led, button},
+		[]gobot.Device{led},
 		work,
 	)
 
